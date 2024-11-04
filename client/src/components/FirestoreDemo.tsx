@@ -5,11 +5,22 @@ import { getLoginCookie } from "../utils/cookie";
 export default function FirestoreDemo() {
   const [words, setWords] = useState<string[]>([]);
 
-  const USER_ID = getLoginCookie() || "";
+  const { user } = useUser();
+
+  if (!user) {
+    // TODO: Improve this error handling
+    return <div>Loading...</div>;
+  }
+
+  const USER_ID = user.id;
 
   useEffect(() => {
     getWords().then((data) => {
-      setWords(data.words);
+      if (data && data.words) {
+        setWords(data.words);
+      } else {
+        setWords([]);
+      }
     });
   }, []);
 
@@ -51,7 +62,7 @@ export default function FirestoreDemo() {
 
       {/* list of words from db: */}
       <p>
-        <i aria-label="user-header">Favorite words for user {USER_ID}:</i>
+        <i aria-label="user-header">Favorite words for {user.fullName}:</i>
       </p>
       <ul aria-label="favorite-words">
         {words.map((word, index) => (

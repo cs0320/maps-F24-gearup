@@ -31,9 +31,27 @@ function App() {
         <SignInButton />
       </SignedOut>
       <SignedIn>
-        <SignOutButton />
-        <UserButton />
-        <MapsGearup />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignContent: "center",
+              padding: "10px",
+              gap: "10px",
+            }}
+          >
+            <SignOutButton />
+            <UserButton />
+          </div>
+          <MapsGearup />
+        </div>
       </SignedIn>
     </div>
   );
