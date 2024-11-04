@@ -1,40 +1,35 @@
 import { useEffect, useState } from "react";
 import { addWord, clearUser, getWords } from "../utils/api";
-import { getLoginCookie } from "../utils/cookie";
+import { useUser } from "@clerk/clerk-react";
 
 export default function FirestoreDemo() {
   const [words, setWords] = useState<string[]>([]);
-
   const { user } = useUser();
 
   if (!user) {
-    // TODO: Improve this error handling
     return <div>Loading...</div>;
   }
 
   const USER_ID = user.id;
 
   useEffect(() => {
-    getWords().then((data) => {
+    getWords(USER_ID).then((data) => {
       if (data && data.words) {
         setWords(data.words);
       } else {
         setWords([]);
       }
     });
-  }, []);
+  }, [USER_ID]);
 
   const addFavoriteWord = async (newWord: string) => {
-    // - update the client words state to include the new word
     setWords([...words, newWord]);
-    // - query the backend to add the new word to the database
-    await addWord(newWord);
+    await addWord(USER_ID, newWord);
   };
 
   return (
     <div className="firestore-demo">
       <h2>Firestore Demo</h2>
-      {/* adding new words: */}
       <label htmlFor="new-word">Add a favorite word:</label>
       <input aria-label="word-input" id="new-word" type="text" />
       <button
@@ -48,19 +43,15 @@ export default function FirestoreDemo() {
       >
         Add
       </button>
-      {/* Clear words button */}
       <button
         onClick={async () => {
-          // - query the backend to clear the user's words
           setWords([]);
-          // - clear the user's words in the database
-          await clearUser();
+          await clearUser(USER_ID);
         }}
       >
         Clear words
       </button>
 
-      {/* list of words from db: */}
       <p>
         <i aria-label="user-header">Favorite words for {user.fullName}:</i>
       </p>

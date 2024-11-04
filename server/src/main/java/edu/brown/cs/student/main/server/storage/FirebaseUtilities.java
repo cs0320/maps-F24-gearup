@@ -43,26 +43,6 @@ public class FirebaseUtilities implements StorageInterface {
   }
 
   @Override
-  public void addDocument(String uid, String collection_id, String doc_id, Map<String, Object> data)
-      throws IllegalArgumentException {
-    if (uid == null || collection_id == null || doc_id == null || data == null) {
-      throw new IllegalArgumentException(
-          "addDocument: uid, collection_id, doc_id, or data cannot be null");
-    }
-    // adds a new document 'doc_name' to colleciton 'collection_id' for user 'uid'
-    // with data payload 'data'.
-
-    // TODO: FIRESTORE PART 2:
-    // use the guide below to implement this handler
-    // - https://firebase.google.com/docs/firestore/quickstart#add_data
-
-    Firestore db = FirestoreClient.getFirestore();
-    // 1: Get a ref to the collection that you created
-
-    // 2: Write data to the collection ref
-  }
-
-  @Override
   public List<Map<String, Object>> getCollection(String uid, String collection_id)
       throws InterruptedException, ExecutionException, IllegalArgumentException {
     if (uid == null || collection_id == null) {
@@ -85,6 +65,27 @@ public class FirebaseUtilities implements StorageInterface {
     }
 
     return data;
+  }
+
+  @Override
+  public void addDocument(String uid, String collection_id, String doc_id, Map<String, Object> data)
+      throws IllegalArgumentException {
+    if (uid == null || collection_id == null || doc_id == null || data == null) {
+      throw new IllegalArgumentException(
+          "addDocument: uid, collection_id, doc_id, or data cannot be null");
+    }
+    // adds a new document 'doc_name' to colleciton 'collection_id' for user 'uid'
+    // with data payload 'data'.
+
+    // TODO: FIRESTORE PART 1:
+    // use the guide below to implement this handler
+    // - https://firebase.google.com/docs/firestore/quickstart#add_data
+
+    Firestore db = FirestoreClient.getFirestore();
+    // 1: Get a ref to the collection that you created
+
+    // 2: Write data to the collection ref
+
   }
 
   // clears the collections inside of a specific user.

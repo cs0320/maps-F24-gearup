@@ -26,6 +26,7 @@ export interface LatLong {
 // };
 // const initialZoom = ...
 
+
 function onMapClick(e: MapLayerMouseEvent) {
   console.log(e.lngLat.lat);
   console.log(e.lngLat.lng);
@@ -33,6 +34,7 @@ function onMapClick(e: MapLayerMouseEvent) {
 
 export default function Mapbox() {
   const [viewState, setViewState] = useState({
+
     // ...
   });
 
@@ -40,22 +42,23 @@ export default function Mapbox() {
   // - add the overlay useState
   // - implement the useEffect to fetch the overlay data
 
+
   return (
     <div className="map">
       <Map
         mapboxAccessToken={MAPBOX_API_KEY}
         {...viewState}
-        // TODO: MAPS PART 2:
-        // - add the primary props to the Map (style, mapStyle, onMove).
+      // TODO: MAPS PART 2:
+      // - add the primary props to the Map (style, mapStyle, onMove).
 
-        // style=...
-        // mapStyle=...
-        // onMove=...
+      // style=...
+      // mapStyle=...
+      // onMove=...
 
-        // TODO: MAPS PART 3:
-        // - add the onClick handler
+      // TODO: MAPS PART 3:
+      // - add the onClick handler
 
-        // onClick=...
+      // onClick=...
       >
         {/* TODO: MAPS PART 6:
             - add the Source and Layer components to the Map that take in data "overlay"

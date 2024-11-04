@@ -1,7 +1,7 @@
 import { FeatureCollection } from "geojson";
 import { FillLayer } from "react-map-gl";
 
-const propertyName = "holc_grade";
+const propertyName = "grade";
 export const geoLayer: FillLayer = {
   id: "geo_data",
   type: "fill",
